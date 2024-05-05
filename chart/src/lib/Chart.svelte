@@ -13,14 +13,12 @@
   import TooltipPoint from "./TooltipPoint.svelte";
   import Tooltip from "./Tooltip.svelte";
 
-// Function to capitalize the first letter of a string
   function capitalize(s) {
     return s[0].toUpperCase() + s.slice(1);
   }
 
   $: console.log('timmee', timeFormat)
 
-// Initializing variables
   let data = [];
   let colors = [
     "#DDA0DD",
@@ -33,23 +31,20 @@
     "#D2B48C",
   ];
 
-// Initializing colors for boxes in the list  
   let boxColors = [
-    "#dda0dd",
+    "#81799D",
     "#b0c4de",
     "#ffc700",
-    "#168ad0",
-    "#f1683c",
     "#6D2932",
+    "#f1683c",
+    "#168ad0",
     "#4fcf43",
     "#c08b5c",
   ];
 
-// Initializing formats for numbers and time  
   let formatNo = format(".1s");
   let formatTime = timeFormat("%Y")
 
-// On mount, fetching data from a CSV file  
   onMount(async () => {
     let fetchedData = await csv("../../processed_weeks.csv", (data) => ({
       armsAndArmourQuantities: +data["ARMS & ARMOUR_quantities"],
@@ -67,7 +62,7 @@
   });
 
 
-// Predefined data points for visualization
+
   const points = [
     { x: 1979, y: 7.19 },
     { x: 1980, y: 7.83 },
@@ -125,7 +120,6 @@
     "musicalInstrumentQuantities",
   ];
 
-// References for lines and areas in the chart  
   let ref1, ref2, ref3, ref4, ref5, ref6, ref7, ref8;
   let refLine1,
     refLine2,
@@ -138,13 +132,12 @@
 
   $: selected = "";
   let yValues = [];
-// Collecting y values for each attribute
+
   $: for (let i = 0; i < data.length; i++) {
     yValues = [...yValues, ...Object.values(_.pick(data[i], attributes))];
     yValues = yValues;
   }
 
-// Formatting data for visualization  
   let formattedData = [];
 
   $: for (let i = 0; i < data.length; i++) {
